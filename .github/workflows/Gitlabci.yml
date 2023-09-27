@@ -8,30 +8,32 @@ on:
       - '/ProjectSettings/**'
   workflow_dispatch: {}
 
-stages:
-  - build
-  - publish
+#stages:
+#  - build
+#  - publish
 
 #variables:
 
-
-buildLinux64:
-  stage: build
-  runs-on: ubuntu-latest
-  steps:
-    - uses: actions/checkout@v3
-    - uses: game-ci/unity-builder@v2
-      env:
-        UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-        UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
-        UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
-      with:
-        targetPlatform: StandaloneLinux64
-        projectPath: anywhereci
-        unityVersion: 2022.3.1f1
-        buildName: anywherelinux64
-     - uses: actions/uplaod-artifact@v3
-       with:
-        name: StandaloneLinux64
-        path: build/StandaloneLinux64
+jobs:
+  buildLinux64:
+  #  stage: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      - name: Build project
+        uses: game-ci/unity-builder@v2
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          targetPlatform: StandaloneLinux64
+          projectPath: anywhereci
+          unityVersion: 2022.3.1f1
+          buildName: anywherelinux64
+      - uses: actions/uplaod-artifact@v3
+        with:
+          name: StandaloneLinux64
+          path: build/StandaloneLinux64
         
