@@ -32,7 +32,7 @@ jobs:
           projectPath: anywhereci
           unityVersion: 2022.3.1f1
           buildName: anywherelinux64
-      - uses: actions/uplaod-artifact@v3
+      - uses: actions/upload-artifact@v3
         with:
           name: StandaloneLinux64
           path: build/StandaloneLinux64
